@@ -1,5 +1,7 @@
 # Flashcard app
 
+![Screenshot of the application](screenshot.png)
+
 Very simple self-hosted flashcard app. I built it for my personal use, but it might be useful to others as well.
 
 - The flashcards are stored in the `data/cards.json` file
