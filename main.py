@@ -31,11 +31,9 @@ except FileNotFoundError:
         fd.write(b"{}")
 
 
-
 class PostCardInput(BaseModel):
     question: str
     answer: str
-
 
 
 @app.post("/card", status_code=201)
@@ -55,6 +53,7 @@ async def new(card: PostCardInput) -> str:
 
     return new_id
 
+
 @app.put("/card/{cardid}", status_code=204)
 async def update(cardid: str, card: PostCardInput):
     with open(CARDS_FILE, "rb") as fd:
@@ -68,9 +67,11 @@ async def update(cardid: str, card: PostCardInput):
     with open(CARDS_FILE, "w") as fd:
         json.dump(cards, fd)
 
+
 @app.get("/")
 async def root():
     return RedirectResponse(url="/index.html")
+
 
 app.mount("/data", StaticFiles(directory="data"), name="data")
 app.mount("/", StaticFiles(directory="static"), name="static")
