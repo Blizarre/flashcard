@@ -181,6 +181,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+        list-style-position: inside;
       }
 
       .flashcard-title {
@@ -200,6 +201,7 @@
         line-height: 1.6;
         display: none;
         font-weight: 500;
+        text-align: left;
       }
 
       .flashcard.revealed .flashcard-description {
@@ -376,6 +378,8 @@
       </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
     <script>
       let currentCardId = null;
       let isEditing = false;
@@ -426,9 +430,8 @@
         document
           .getElementById("flashcard-title")
           .appendChild(document.createTextNode(currentCard.question));
-        document
-          .getElementById("flashcard-description")
-          .appendChild(document.createTextNode(currentCard.answer));
+        document.getElementById("flashcard-description").innerHTML =
+          DOMPurify.sanitize(marked.parse(currentCard.answer));
       }
 
       // Toggle card to show/hide description
