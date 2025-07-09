@@ -415,14 +415,20 @@
                             <button class="btn btn-edit btn-small" onclick="event.stopPropagation(); editCard('${currentCardId}')">✏️</button>
                         </div>
                         <div class="flashcard-content">
-                            <div class="flashcard-title">${currentCard.question}</div>
-                            <div class="flashcard-description">${currentCard.answer}</div>
+                            <div id="flashcard-title" class="flashcard-title"></div>
+                            <div id="flashcard-description" class="flashcard-description"></div>
                         </div>
                     </div>
                 </div>
             `;
 
         document.getElementById("flashcard-area").innerHTML = flashcardHTML;
+        document
+          .getElementById("flashcard-title")
+          .appendChild(document.createTextNode(currentCard.question));
+        document
+          .getElementById("flashcard-description")
+          .appendChild(document.createTextNode(currentCard.answer));
       }
 
       // Toggle card to show/hide description
