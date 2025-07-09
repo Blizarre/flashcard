@@ -387,7 +387,7 @@
       let flashcards = null;
 
       async function loadCards() {
-        const response = await fetch("/data/cards.json");
+        const response = await fetch("/data/cards.json", { cache: "no-cache" });
         if (response.ok) {
           flashcards = await response.json();
           console.log("Cards loaded:", Object.keys(flashcards).length);
