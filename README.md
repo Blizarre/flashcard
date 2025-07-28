@@ -1,5 +1,7 @@
 # Flashcard app
 
+**THIS IS A VIBE-CODED app made with Claude. I DID NOT REVIEW ALL THE CODE BUT EVERY TIME I LOOK AT SOMETHING I FIND A CRITICAL OWASP TOP 10 VULNERABILITY IN IT. DO NOT PUT THIS ON THE OPEN INTERNET. IT SHOULD RUN STRICTLY ON A CONTAINER, BE SINGLE USER (YOU) AND BE PROTECTED BEHIND AN AUTH PROXY THAT IS PROPERLY CONFIGURED.**
+
 Very simple self-hosted flashcard app. I built it for my personal use, but it might be useful to others as well.
 
 - The flashcards are stored in the `data/cards.json` file
