@@ -381,6 +381,7 @@
       let isEditing = false;
       let editingCardId = null;
       let flashcards = null;
+      let recentlyShownCards = [];
 
       async function loadCards() {
         const response = await fetch("/data/cards.json", { cache: "no-cache" });
@@ -404,9 +405,30 @@
           return;
         }
 
-        const randomIndex = Math.floor(Math.random() * keys.length);
-        let currentCardId = keys[randomIndex];
+        // Calculate memory size: floor(number of cards / 2)
+        const memorySize = Math.floor(keys.length / 2);
+        
+        // Keep recentlyShownCards within memory size
+        if (recentlyShownCards.length > memorySize) {
+          recentlyShownCards = recentlyShownCards.slice(-memorySize);
+        }
+
+        // Find available cards (not in recently shown list)
+        let availableCards = keys.filter(cardId => !recentlyShownCards.includes(cardId));
+        
+        // If all cards have been shown recently, reset the memory
+        if (availableCards.length === 0) {
+          recentlyShownCards = [];
+          availableCards = keys;
+        }
+
+        // Pick a random card from available cards
+        const randomIndex = Math.floor(Math.random() * availableCards.length);
+        let currentCardId = availableCards[randomIndex];
         currentCard = flashcards[currentCardId];
+
+        // Add this card to recently shown list
+        recentlyShownCards.push(currentCardId);
 
         const flashcardHTML = `
                 <div class="flashcard-container">
